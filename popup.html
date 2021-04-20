@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="js/jquery.js"></script>
+        <script src="js/ajax_libs_xlsx_0.14.3_xlsx.full.min.js"></script>
+        <script src="js/popup.js"></script>
+        <link href='https://fonts.googleapis.com/css?family=PT Sans Caption' rel='stylesheet'>
+        <link rel="stylesheet" href="css/popup.css">
+    </head>
+    <body style="font-family: PT Sans Caption;">
+        <div id="attachment_popup" style="display: none;">
+            <div style="background-color: rgba(0, 0, 0, 0.5);opacity: .95 !important;height: 2848px;width: 1440px;
+            position: fixed;left: 0px;top: 0px;z-index: 1001;"></div>
+            <div style="position: fixed;z-index: 1002;background: #fff;padding: 12px;top: 400px;">
+                <div style="display: flex;">
+                    <input type="checkbox" name="attachments" value="attachments" checked>
+                    <label style="padding-top: 2px;padding-left: 4px;"> Juntar anexo</label><br>
+                </div>
+                <div style="font-size: 11px;margin: 4px 2px;color: #C4C4C4;">
+                    <img src="logo/sound-bell.png" style="width: 14px;height: 14px;margin-right: 4px;"/>
+                    Leia as seguintes instru&ccedil;&otilde;es antes de enviar o anexo
+                </div>
+                <div>
+                    <ul>
+                        <li>Clique em 'Adicionar anexo' >> Clique no tipo de arquivo >> Selecione o arquivo que deseja enviar</li>
+                        <li>A primeira mensagem seria enviada para voc&ecirc;</li>
+                        <li>Assim que for enviado, abra a extens&atilde;o e clique em 'Enviar Mensagem'. Suas mensagens junto com a imagem / v&iacute;deo ser&atilde;o enviadas uma a uma</li>
+                    </ul>
+                </div>
+                <button id="attachment_popup_okay" style="border: 0px;margin: 0px 120px;width: 180px;height: 32px;background-color: #00C451;border-radius: 4px;color: white;cursor: pointer;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);font-family: PT Sans Caption;font-weight: 700;">
+                    OK</button>
+            </div>
+        </div>
+        <div style="padding: 12px;padding-bottom: 0px;">
+            <div>
+                <div style="font-size: 16px;font-weight: 700;display: flex;margin-bottom: 12px;float: left;">
+                    <img src="logo/large.png" style="width: 36px;"/>
+                    <div style="padding: 8px;">Whats Bolad&atilde;o Plus</div>
+                </div>
+                <div style="float: right;padding: 12px 0px 8px 0px;display: flex;">
+                    <div id="demo_video" style="color: #00C451;cursor: pointer;display: flex;font-weight: bold;">
+                        <img src="logo/video.png" style="width: 16px;height: 16px;margin-right: 4px;"/>
+                        <span>V&iacutedeo de demonstra&ccedil;&atilde;o</span>
+                    </div>
+                    <div id="help" style="margin-left: 16px;color: #F40B0B;font-weight: bold;cursor: pointer;border: 1px solid #F40B0B;padding: 4px;margin-top: -4px;box-sizing: border-box;border-radius: 3px;">
+                        <img src="logo/red_dot.png" style="width: 10px;height: 10px;padding-right: 2px;"/>
+                        Suporte
+                    </div>
+                </div>
+            </div>
+            <div style="clear: both;"></div>
+            <div id="important_notice" style="background: rgba(230, 129, 129, 0.7);border-radius: 3px;padding: 16px;font-family: system-ui, sans-serif;display: none;">
+                <div style="font-weight: bold;font-size: 16px;color: rgba(244, 11, 11, 0.8);padding-bottom: 8px;">Importante!</div>
+                <div style="font-weight: normal;font-size: 14px;color: #FFFFFF;">
+                    Devido a mudan&ccedil;a nos T&C do WhatsApp, <span style="font-weight: 800;font-size: 16px;">podemos ter que fechar as opera&ccedil;&otilde;es desta extens&atilde;o.</span><br/>
+                    Como um usu&aacute;rio ativo, para continuar fornecendo o servi&ccedil;o, voc&ecirc; pode mudar para um <span style="font-weight: 800;font-size: 16px;">nova extens&atilde;o feita exclusivamente para voc&ecirc; com todos os mesmos recursos</span>. Para acessar a extens&atilde;o, entre no seguinte Grupo fechado do Google.
+                </div>
+                <a href="https://groups.google.com/g/closed-group-for-extension" target="_blank" style="background: #FFFFFF;border-radius: 3px;padding: 8px 32px;display: inline-block;margin: 12px 160px 0px;text-decoration: none;
+                    font-weight: bold;font-size: 12px;color: rgba(229, 129, 129, 0.8);">
+                    Juntar</a>
+            </div>
+            <div style="clear: both;"></div>
+            <div style="margin-bottom: 4px;">
+                <div class="text_title radio-item" style="padding: 8px 0px;">
+                    <label>Digite os n&uacute;meros para a mensagem</label>
+                </div>
+                <textarea id="numbers" placeholder="Insira os n&uacute;meros separados por virgula (,). Inclua o c&oacute;digo do pa&iacute;s. Por exemplo. 91912365800, 18256562311" style="width: 424px;height: 44px;padding: 12px;"></textarea><br/>
+                <div id="number_disable_message" style="font-size: 11px;margin: 4px 2px;color: #707274;display: none;">
+                    Os n&uacute;meros foram congelados. Para editar, reenvie o excel atualizado.
+                </div>
+            </div>
+            <div class="text_title radio-item" style="padding: 8px 0px;">
+                <label>... ou fa&ccedil;a upload de n&uacute;meros em excel (csv)</label>
+            </div>
+            <div style="margin-bottom: 4px;">
+                <div style="float: left;">
+                    <label style="color: #00C451;border: 1px solid #00C451;border-radius: 4px;padding: 6px 12px;cursor: pointer;display: inline-flex;">
+                        <img src="logo/upload.png" style="width: 14px;padding-right: 4px;"/>
+                        <span>Carregar</span>
+                        <input type="file" id="csv" value="Upload" accept=".xls,.xlsx,.ods,.csv" style="display: none;"/>
+                    </label>
+                    <div id="uploaded_csv" style="color: #C4C4C4;"></div>
+                </div>
+                <div style="display: grid;float: right;">
+                    <a href="https://sites.google.com/view/modelodearquivoexcel" target="_blank" id="download_template" style="color: #00C451;cursor: pointer;margin-bottom: 12px;display: flex;text-decoration: unset;">
+                        <img src="logo/arrow.png" style="width: 14px;padding-right: 4px;"/>
+                        <span>Ver Modelo Excel</span>
+                    </a>
+                    <div id="download_group" style="color: #00C451;cursor: pointer;display: flex;">
+                        <img src="logo/download.png" style="width: 14px;padding-right: 4px;"/>
+                        <span>Baixar Contatos do Grupo</span>
+                    </div>
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <div style="border: 1px solid #C4C4C4;width: 100%;margin-top: 16px;"></div>
+            <div style="clear: both"></div>
+            <div class="text_title" style="margin-left: 0px;padding: 8px 0px;margin-top: 8px;">
+                Digite a mensagem
+                <span style="float: right;color: #707274;font-size: 12px;font-weight: 500;">
+                    <span style="font-weight: bold;margin-right: 12px;">*text*</span>
+                    <span style="font-style: italic;margin-right: 12px;">_text_</span>
+                    <span style="text-decoration: line-through;margin-right: 12px;">~text~</span>
+                    <a href="https://getemoji.com/" target="_blank" style="color: #707274;">EMOJIS</a>
+                </span>
+            </div>
+            <textarea type="text" id="message" placeholder="Digite sua mensagem aqui..." style="margin: 0px 0px 8px 0px;width: 424px;height: 44px;padding: 12px;"></textarea><br/>
+            <div style="margin-bottom: 12px;">
+                <input type="checkbox" id="customization" name="customization" value="customization">
+                <label style="padding-top: 2px;">Adicionar personaliza&ccedil;&atilde;o do excel</label>
+                <select id="customized_arr" style="margin-left: 4px;">
+                    <option selected disabled>Selecione a op&ccedil;&atilde;o</option>
+                </select>
+            </div>
+            <div style="clear: both;"></div>
+            <div id="attachment" style="margin-bottom: 12px;">
+                <div style="display: flex;">
+                    <input type="checkbox" id="send_attachments" name="attachments" value="attachments">
+                    <label style="padding-top: 2px;padding-left: 4px;"> Juntar anexo</label>
+                    <button style="border: 1px solid #00C451;color: #00C451;padding: 0px 4px;
+                        margin-left: 4px;border-radius: 50%;" id="attachment_info">?</button><br>
+                </div>
+                <div id="attachment_type" hidden="true">
+                    <input type="radio" id="pv" name="attachment" value="pv">
+                    <label style="padding-top: 2px;padding-left: 4px;padding-right: 8px;" for="pv">Image/Video</label>
+                    <input type="radio" id="doc" name="attachment" value="doc">
+                    <label style="padding-top: 2px;padding-left: 4px;padding-right: 8px;" for="doc">Documento</label>
+                    <input type="radio" id="cn" name="attachment" value="cn">
+                    <label style="padding-top: 2px;padding-left: 4px;padding-right: 8px;" for="cn">Contato</label>
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <div id="time_gap" style="margin-bottom: 12px;">
+                <div style="display: flex;">
+                    <input type="checkbox" id="time_gap_checked" name="time_gap" value="time_gap">
+                    <label style="padding-top: 2px;padding-left: 4px;">Adicionar um intervalo de tempo entre as mensagens</label>
+                </div>
+                <div id="time_gap_type" hidden="true">
+                    <input type="radio" id="sec" name="time_gap" value="sec" style="margin-top: 6px;" checked="true">
+                    <label style="padding-top: 2px;padding-left: 4px;padding-right: 8px;" for="sec">
+                        <input type="number" id="time_gap_sec" name="time_gap_sec" min="1" max="500" value="3" style="width: 40px;" placeholder="3">
+                        segundos
+                    </label>
+                    <input type="radio" id="random" name="time_gap" value="random" style="margin-top: 6px;">
+                    <label style="padding-top: 5px;padding-left: 4px;padding-right: 8px;" for="random">Aleat&oacute;rio</label>
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <div id="batch" style="margin-bottom: 12px;">
+                <div style="display: flex;">
+                    <input type="checkbox" id="batch_checked" name="batch" value="batch">
+                    <label style="padding-top: 2px;padding-left: 4px;">Adicionar lote</label>
+                </div>
+                <div id="batch_info" hidden="true">
+                    <label style="padding-top: 2px;padding-left: 12px;padding-right: 8px;">
+                        Envie em lotes de <input type="number" id="batch_size" name="batch_size" min="1" max="500" style="width: 40px;" placeholder="50"> mensagens
+                    </label>
+                    <label style="padding-top: 2px;padding-left: 12px;padding-right: 8px;">
+                        Adicione um intervalo de tempo de <input type="number" id="batch_gap" name="batch_gap" min="1" max="500" style="width: 40px;" placeholder="30"> segundos entre os lotes
+                    </label>
+                </div>
+            </div>
+            <div style="clear: both"></div>
+<!--            <div style="margin-bottom: 12px;">-->
+<!--                <div style="display: flex;">-->
+<!--                    <label style="padding-top: 2px;padding-right: 4px;">Add a time gap of</label>-->
+<!--                    <input type="number" id="time_gap" name="time_gap" min="1" max="500" style="width: 40px;">-->
+<!--                    <label style="padding-top: 2px;padding-left: 4px;"> seconds between messages</label><br>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="text_body" style="margin-left: 8px;padding: 8px 0px;color: red;display: none;" id="error_message"></div>
+            <button id="sender" style="border: 0px;margin-left: 8px;width: 120px;height: 32px;background-color: #00C451;border-radius: 4px;color: white;cursor: pointer;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);font-family: PT Sans Caption;font-weight: 700;">
+                Enviar mensagem</button>
+            <button id="report" style="border: 1px solid #00C451;margin-left: 24px;width: 140px;height: 32px;background-color: #fff;border-radius: 4px;color: #00C451;cursor: pointer;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);font-family: PT Sans Caption;font-weight: 700;">
+                Relat&oacute;rio de entrega</button>
+            <button id="stop" style="border: 0px;margin-left: 80px;width: 60px;height: 32px;background-color: #F40B0B;border-radius: 4px;color: white;cursor: pointer;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);font-family: PT Sans Caption;font-weight: 700;">
+                Pare</button>
+            <br/>
+            <div class="text_body" style="margin-left: 8px;padding: 8px 0px;color: #F16539;">As mensagens n&atilde;o est&atilde;o sendo enviadas? Experimente Ctrl + Shift + R</div>
+        </div>
+        <div style="background: rgba(0, 196, 81, 0.25);width: 93%;padding: 12px 16px;margin-bottom: 12px;">
+            <div id="schedule_div">
+                <img src="logo/watch.png" style="width: 16px;height: 16px;margin-right: 4px;display: inline-block;vertical-align: text-bottom;"/>
+                <label style="padding-right: 4px;">Programe sua campanha em</label>
+                <input type="time" id="schedule_time" name="schedule_time">
+                <button id="schedule" style="background-color: #00C451;float: right;border-radius: 3px;color: #fff;border: 0px;padding: 6px 12px;font-family: PT Sans Caption;cursor: pointer;">
+                    Cronogramar</button>
+            </div>
+            <div id="scheduled_div" style="display: none;">
+                Sua campanha est&aacute; agendada para as 15h. Clique aqui para cancelar
+            </div>
+            <div style="font-weight: normal;font-size: 10px;line-height: 12px;color: #000;margin-top: 12px;">
+                N&atilde;o execute nenhuma campanha normal antes da hora programada. <a href="https://waboladao.online/plus-agendamento" target="_blank" style="color: #00C451;text-decoration: unset;">Saber mais</a>
+            </div>
+        </div>
+<!--        <div style="margin: 12px 8px;border-top: 1px solid black;"></div>-->
+<!--        <div id="rate_us" style="background: rgba(0, 196, 81, 0.25);text-align: center;padding: 8px 16px;display: none;">-->
+<!--            <img src="logo/star.png" style="width: 16px;height: 16px;padding-right: 4px;"/>-->
+<!--            <span class="text_body" style="line-height: 13px;color: #000;margin-top: 2px;">Love the product? Please take a few seconds out to give us-->
+<!--                a  <span id="review_click" style="margin-right: 8px;color: #00C451;cursor: pointer;">review</span></span>-->
+<!--        </div>-->
+        <div id="survey" style="background: rgba(0, 196, 81, 0.25);text-align: center;padding: 8px 16px;display: none;">
+            <img src="logo/star.png" style="width: 16px;height: 16px;padding-right: 4px;"/>
+            <span class="text_body" style="line-height: 13px;color: #000;margin-top: 2px;">Precisa de mais recursos? Responda a estas 2 perguntas
+                <span id="survey_click" style="margin-right: 8px;color: #00C451;cursor: pointer;">pesquisa</span></span>
+        </div>
+        <div style="background: rgba(196, 196, 196, 0.5);text-align: center;padding: 12px;">
+            <a style="display: flex;justify-content: center;margin-top: 8px;">
+                <a href="https://forms.gle/TdpcJrnaf5XfMrWdA" target="_blank" style="margin-right: 8px;color: #707274;">Tem alguma dica?</a>
+				<a href="https://waboladao.online/plus-faqs" target="_blank" style="margin-right: 8px;color: #707274;">FAQs</a>
+                <a href="https://forms.gle/RYTVbyw39H9ZYJvQ6" target="_blank" style="margin-right: 8px;color: #707274;">Reportar um erro</a>
+            </div>
+        </div>
+        <div></div>
+    </body>
+</html>

@@ -1,0 +1,17 @@
+.text_body {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.text_title{
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.radio-item label:before {
+    border: 1px solid #00C451;
+}
+
+.radio-item input[type=radio]:checked + label:after {
+    background: #00C451;
+}

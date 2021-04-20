@@ -1,0 +1,121 @@
+.modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.messanger_popup {
+    position: absolute;
+    z-index: 100;
+    top: 240px;
+    left: 600px;
+    overflow: auto;
+}
+
+/* Modal Content */
+.messanger_popup_content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 12px 16px;
+    border: 1px solid #888;
+    width: 480px;
+}
+
+.close1 {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close1:hover,
+.close1:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.popup_text_title{
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 21px;
+    color: #000000;
+    display: flex;
+}
+
+.messanger_time_bar{
+    border-radius: 16px;
+    width: 400px;
+    height: 24px;
+    background: #6F7377;
+}
+
+.messanger_sending{
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    color: #000000;
+    text-align: center;
+}
+
+.watch_icon{
+    background-image: url("chrome-extension://__MSG_@@extension_id__/logo/watch.png");
+    width: 16px;
+    height: 16px;
+    position: relative;
+    margin-right: 8px;
+    background-size: cover;
+    top: 3px;
+}
+
+.mail_icon{
+    background-image: url("chrome-extension://__MSG_@@extension_id__/logo/email.png");
+    width: 20px;
+    height: 20px;
+    position: relative;
+    margin-right: 4px;
+    background-size: cover;
+    top: -2px;
+}
+
+.heart_icon{
+    background-image: url("chrome-extension://__MSG_@@extension_id__/logo/heart.png");
+    width: 31px;
+    height: 25px;
+    position: relative;
+    margin-right: 12px;
+    background-size: cover;
+    top: -2px;
+}

@@ -1,0 +1,29 @@
+{
+   "background": {
+      "scripts": [ "js/jquery.js", "js/background.js" ]
+   },
+   "browser_action": {
+      "default_popup": "popup.html",
+      "default_title": "Whats Boladão Plus"
+   },
+   "content_scripts": [ {
+      "css": [ "css/content.css" ],
+      "js": [ "js/jquery.js", "js/content.js" ],
+      "matches": [ "*://web.whatsapp.com/*" ]
+   } ],
+   "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+   "default_locale": "pt_BR",
+   "description": "__MSG_Desc__",
+   "icons": {
+      "128": "logo/large.png",
+      "16": "logo/small.png",
+      "48": "logo/medium.png"
+   },
+   "key": "MIIBIjBNBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxcNfBZ3IsPBf1W7t3FVwhQhSl5RwuALgUL4ssDicOf+Bc818C/9HMvkQjwi+EaD6HgloWaD2by/LqWKFTDpPO3UI6QAA+GajES/pM87emzTpeB6OD0lXC2xEpKMmt3IOZXlRPEb/v6uDJnI2chJjhAxyDE3hOqOfJpdqIWc8U1ujOtiYWSaWTBjSGCNP5ktkFxz6XhoHrBmdFNqzZNLLKnBEoEfOa0zTcEiZaQwfj9UBxmxwgX8dG7vn6w6W5ZkNNIpUt5CuYVU6MufrqhmRnxjGhk3IBK2Juj99Urxz6gNL/+iJuc/hDjqQWWND3euQkj9gwUrbV6T4Dzb/NJ6zHQIDAQAB",
+   "manifest_version": 2,
+   "name": "Whats Boladão - Plus",
+   "permissions": [ "storage", "notifications", "tabs", "identity", "identity.email", "activeTab", "*://web.whatsapp.com/*" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "2.1.6",
+   "web_accessible_resources": [ "/logo/*", "js/client.js" ]
+}
